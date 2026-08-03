@@ -1,0 +1,56 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.contact-page {
+  width: 100%;
+
+  > h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+
+  &__info {
+    margin-bottom: 40px;
+    line-height: 1.6;
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: $pink;
+      text-decoration: underline;
+    }
+  }
+
+  .contact-form {
+    width: 100%;
+
+    &__field {
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+      position: relative;
+      display: inline-block;
+      padding-block: calc(var(--spacing) * 3);
+      color: $white;
+      background-color: $pink;
+      background-image: linear-gradient($blue, $blue);
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: 0% 0%;
+      transition: background-size .5s, color .5s;
+      border-radius: .25rem;
+      cursor: pointer;
+      &:hover,
+      &.is-active {
+        color: $black;
+        background-size: 100% 100%;
+      }
+    }
+
+  } // .contact-form
+
+}

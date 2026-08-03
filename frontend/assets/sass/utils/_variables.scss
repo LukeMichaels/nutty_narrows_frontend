@@ -1,0 +1,21 @@
+@use "sass:map";
+@use "sass:meta";
+
+$white: #FFFFFF;
+$black: #0F1729;
+$blue: #3ABBEC;
+$pink: #CF69A8;
+$yellow: #F9ED32;
+$error: #7a1f1f;
+
+$site-margins: 1240px;
+
+// Breakpoints
+$breakpoints: (
+	'b-640': (min-width: 640px),
+	'b-720': (min-width: 720px),
+	'b-768': (min-width: 768px),
+	'b-943': (min-width: 943px),
+	'b-1024': (min-width: 1024px),
+	'b-1210': (min-width: 1210px),
+);

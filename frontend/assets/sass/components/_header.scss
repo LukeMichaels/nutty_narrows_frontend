@@ -1,0 +1,193 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+// Reserves the header's normal-flow space now that <header> itself is
+// fixed, and shrinks in sync with it (see body.header-scrolled below) so
+// the page content slides up smoothly instead of leaving a gap or being
+// covered.
+.header-sentinel {
+  height: 0;
+}
+
+.header-spacer {
+  height: 200px;
+  transition: height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.header-scrolled .header-spacer {
+  height: 100px;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1240px;
+    padding: 20px 40px;
+    margin: 0 auto;
+    background-color: $black;
+    transition: padding 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  // Set on <body> (not locally) so the spacer above can shrink in sync —
+  // see Header.tsx.
+  body.header-scrolled & .header-content {
+    padding: 10px 40px;
+  }
+
+  .header-left {
+    margin: auto auto auto 0;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+    margin: auto 0 auto auto;
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 0.2em 0.2em; //padding: 0;
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    background-image: radial-gradient(circle closest-side, $pink 100%, transparent 100%);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 0% 0%;
+    transition: background-size 0.5s, color 0.5s;
+    &:hover,
+    &.is-active {
+      background-size: 100% 100%;
+    }
+
+    @include respond-to(b-720) {
+      display: none;
+    }
+
+    &__bar {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: $white;
+      transition: transform 0.3s, opacity 0.3s, background-color 0.5;
+    }
+
+    &:hover {
+      .nav-toggle__bar {
+        background-color: $black;
+      }
+    }
+
+    &[aria-expanded="true"] .nav-toggle__bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    &[aria-expanded="true"] .nav-toggle__bar:nth-child(2) {
+      opacity: 0;
+    }
+    &[aria-expanded="true"] .nav-toggle__bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 20px 80px 20px;
+    background-color: $black;
+
+    &.is-open {
+      display: flex;
+      z-index: 6;
+    }
+
+    @include respond-to(b-720) {
+      display: flex;
+      position: static;
+      flex-direction: row;
+      justify-content: right;
+      gap: 24px;
+      padding: 0;
+      background-color: transparent;
+    }
+
+    .nav-link {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      padding: 0.2em 0;
+      text-align: right;
+      @include respond-to(b-720) {
+        text-align: center;
+      }
+      &::after {
+        opacity: 1;
+        transform: translate3d(-100%, 0, 0);
+      }
+      &:hover {
+        color: $pink;
+      }
+      &:hover::after,
+      &:focus::after {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0.1em;
+      background-color: $pink;
+      opacity: 0;
+      transition: opacity 300ms, transform 300ms;
+      opacity: 1;
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus::after {
+      transform: translate3d(0, 0, 0);
+    }
+
+  } // .nav-links
+
+  @media (prefers-reduced-motion: reduce) {
+    .header-content {
+      transition: none;
+    }
+  }
+
+} // header
+
+@media (prefers-reduced-motion: reduce) {
+  .header-spacer {
+    transition: none;
+  }
+}

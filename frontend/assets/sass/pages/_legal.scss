@@ -1,0 +1,42 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+// Shared by Privacy Policy and Cookie Policy - both are just paragraphs
+// and a numbered list pulled straight from wp-admin.
+.legal-page {
+  width: 100%;
+  padding: 40px 0;
+
+  > h1 {
+    margin-bottom: 40px;
+  }
+
+  &__content {
+    line-height: 1.6;
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    .wp-block-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-left: 24px;
+      margin-bottom: 20px;
+
+      li {
+        padding-left: 8px;
+      }
+    }
+
+    a {
+      color: $pink;
+      text-decoration: underline;
+    }
+
+    strong {
+      color: $pink;
+    }
+  }
+}

@@ -35,11 +35,12 @@ wp-config.php
 # htaccess
 /.htaccess
 
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# macOS
+.DS_Store
+
+# All plugins - third-party (ACF, wp-graphql, redis-cache, etc.), installed
+# rather than hand-edited, so treated like a dependency and left untracked.
+/wp-content/plugins
 
 # All themes
 #

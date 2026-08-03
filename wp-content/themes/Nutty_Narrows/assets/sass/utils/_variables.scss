@@ -1,0 +1,18 @@
+@use "sass:map";
+@use "sass:meta";
+
+$white: #FFFFFF;
+$black: #0f1729;
+$blue: #3abbec;
+$pink: #cf69a8;
+
+$site-margins: 1240px;
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+/// @see {mixin} respond-to
+$breakpoints: (
+  'b-900': (max-width: 900px),
+  'b-600': (max-width: 600px),
+);

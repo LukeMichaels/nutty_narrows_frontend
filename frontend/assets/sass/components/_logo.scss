@@ -1,0 +1,21 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+// Placeholder text wordmark styling — replace once the real logo mark
+// (Phase 3) exists.
+.wrap {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.header {
+  color: $blue;
+  font-size: 1.5rem;
+}
+
+.footer {
+  color: $black;
+  font-size: 1.25rem;
+}

@@ -1,0 +1,15 @@
+@use "variables" as v;
+@use "sass:map";
+@use "sass:meta";
+
+// Mixin for media queries
+@mixin respond-to($name) {
+  @if map.has-key(v.$breakpoints, $name) {
+    @media #{meta.inspect(map.get(v.$breakpoints, $name))} {
+      @content;
+    }
+  } @else {
+    @warn "No value could be retrieved from `#{$name}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}

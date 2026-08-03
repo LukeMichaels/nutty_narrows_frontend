@@ -1,0 +1,6 @@
+// Single Sass entry point, imported once in app/layout.tsx.
+// Each folder below is a layer of the 7-1 pattern
+@forward "utils";
+@forward "components";
+@forward "layout";
+@forward "pages";

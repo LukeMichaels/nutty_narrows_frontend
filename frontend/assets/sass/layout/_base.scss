@@ -1,0 +1,39 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+body {
+  background-color: $black;
+  color: $white;
+}
+
+.site-margins {
+  width: 100%;
+  max-width: $site-margins;
+  position: relative;
+  padding: 40px 40px;
+  margin: 0 auto;
+  z-index: 2;
+  background-color: $black;
+}
+
+.pink {
+  color: $pink;
+}
+
+.blue {
+  color: $blue;
+}
+
+h1 {
+  color: $blue;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+// ol {
+//   list-style-type: decimal;
+// }
+
+strong {
+  color: $pink;
+}

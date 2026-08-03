@@ -1,0 +1,79 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.about-page {
+  width: 100%;
+
+  .about-image-column {
+    max-width: 400px;
+
+    .wp-block-image {
+      margin: 20px 0;
+      &:first-of-type {
+        margin-top: 0;
+      }
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    .wp-element-caption {
+      color: $pink;
+    }
+  } // .about-image-column 
+
+  h1 {
+    margin-bottom: 40px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .wp-block-columns {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      @include respond-to(b-768) {
+        flex-direction: row;
+        gap: 40px;
+      }
+    }
+
+    .wp-block-column {
+      flex: 1;
+    }
+
+    .wp-block-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .wp-block-heading {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+
+      &.has-large-font-size {
+        font-size: 1.75rem;
+      }
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .has-primary-color {
+      color: $pink;
+    }
+
+  } // &__content
+
+} // .about-page
