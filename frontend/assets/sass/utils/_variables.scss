@@ -27,6 +27,7 @@ $font-heading-bold: 600;
 
 // Breakpoints
 $breakpoints: (
+	'b-360': (min-width: 360px),
 	'b-640': (min-width: 640px),
 	'b-720': (min-width: 720px),
 	'b-768': (min-width: 768px),

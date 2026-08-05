@@ -17,7 +17,7 @@ export default function Logo({
 
   return (
     <Link href="/" aria-label="Return to the front page" className="wrap header">
-      {/* <LogoCompact /> */}
+      <LogoCompact />
       <LogoFull />
     </Link>
   );

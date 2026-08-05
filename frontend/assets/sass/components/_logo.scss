@@ -9,27 +9,27 @@
 }
 
 .header {
-  // .logo-compact {
-  //   display: block;
-  //   height: 40px;
-  //   width: auto;
-  // }
+  .logo-compact {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
 
   .logo-full {
-    display: block;
+    display: none;
     height: 36px;
     width: auto;
   }
 
-//   @include respond-to(b-720) {
-//     .logo-compact {
-//       display: none;
-//     }
-// 
-//     .logo-full {
-//       display: block;
-//     }
-//   }
+  @include respond-to(b-360) {
+    .logo-compact {
+      display: none;
+    }
+
+    .logo-full {
+      display: block;
+    }
+  }
 }
 
 .footer {
