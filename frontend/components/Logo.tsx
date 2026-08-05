@@ -9,14 +9,14 @@ export default function Logo({
 }) {
   if (variant === "footer") {
     return (
-      <Link href="/" aria-label="Return to the front page" className="wrap footer">
+      <Link href="/" aria-label="Return to the front page" className="wrap footer" scroll={false}>
         <LogoCompact />
       </Link>
     );
   }
 
   return (
-    <Link href="/" aria-label="Return to the front page" className="wrap header">
+    <Link href="/" aria-label="Return to the front page" className="wrap header" scroll={false}>
       <LogoCompact />
       <LogoFull />
     </Link>

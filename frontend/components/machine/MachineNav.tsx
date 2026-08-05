@@ -148,7 +148,7 @@ export default function MachineNav() {
         // anyway.
         const color = ITEM_TRANSITION_COLOR[item.id];
         if (color) startPageTransition(color);
-        router.push(item.href);
+        router.push(item.href, { scroll: false });
         resetVend();
       } else {
         setPhase("returning");
@@ -166,7 +166,7 @@ export default function MachineNav() {
 
     if (reducedMotion) {
       if (item.href) {
-        router.push(item.href);
+        router.push(item.href, { scroll: false });
         return;
       }
       // Decorative item: no destination — just acknowledge the press.
@@ -232,6 +232,7 @@ export default function MachineNav() {
               style={style}
               className={className}
               aria-label={`${item.code} — ${item.label}`}
+              scroll={false}
               onClick={(event) => handleLinkActivate(event, item)}
             >
               <span className="visually-hidden">{item.label}</span>

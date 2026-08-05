@@ -32,6 +32,7 @@ export default function HeaderNav() {
             key={link.href}
             href={link.href}
             className="nav-link"
+            scroll={false}
             onClick={() => setIsOpen(false)}
           >
             {link.label}

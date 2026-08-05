@@ -19,7 +19,7 @@ export default function VendAnotherLink() {
   if (pathname === "/") return null;
 
   return (
-    <Link href="/" className="vend-another-link">
+    <Link href="/" className="vend-another-link" scroll={false}>
       <svg
         className="vend-another-link__icon"
         xmlns="http://www.w3.org/2000/svg"
