@@ -28,11 +28,15 @@ body {
 
 .page-content-wrap {
   padding: 40px 30px 60;
-  
+
   h1 {
     margin: 0 0 20px;
   }
-}
+
+  a {
+    text-decoration: underline;
+  }
+} // .page-content-wrap 
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-heading;

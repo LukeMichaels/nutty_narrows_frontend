@@ -15,7 +15,7 @@ declare( strict_types = 1 );
 		<!-- wp:site-title {"textAlign":"center"} /-->
 
 		<!-- wp:paragraph {"align":"center","fontSize":"small"} -->
-		<p class="has-text-align-center has-small-font-size" style="color: #0f1729;"><?php echo esc_html( '© ' . gmdate( 'Y' ) . ' Nutty Narrows Thrift Shop' ); ?></p>
+		<p class="has-text-align-center has-small-font-size"><?php echo esc_html( '© ' . gmdate( 'Y' ) . ' Nutty Narrows Thrift Shop' ); ?></p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->

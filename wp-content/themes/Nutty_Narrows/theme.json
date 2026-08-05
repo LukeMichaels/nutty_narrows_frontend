@@ -13,29 +13,49 @@
 			"gradients": [],
 			"palette": [
 				{
-					"color": "#0f1729",
-					"name": "Base",
+					"color": "#F7BBCC",
+					"name": "Light Pink",
 					"slug": "base"
 				},
 				{
-					"color": "#3b3b3b",
-					"name": "Contrast",
+					"color": "#6acfc3",
+					"name": "Teal",
 					"slug": "contrast"
 				},
 				{
-					"color": "#cf69a8",
-					"name": "Primary",
+					"color": "#614880",
+					"name": "Purple",
 					"slug": "primary"
 				},
 				{
-					"color": "#3abbec",
-					"name": "Secondary",
+					"color": "#9de565",
+					"name": "Green",
 					"slug": "secondary"
 				},
 				{
-					"color": "#3abbec",
-					"name": "Tertiary",
+					"color": "#d2863a",
+					"name": "Orange",
 					"slug": "tertiary"
+				},
+				{
+					"color": "#f47884",
+					"name": "Pink",
+					"slug": "pink"
+				},
+				{
+					"color": "#f5f5bf",
+					"name": "Yellow",
+					"slug": "yellow"
+				},
+				{
+					"color": "#abf4f5",
+					"name": "Sky Blue",
+					"slug": "sky-blue"
+				},
+				{
+					"color": "#6c8bda",
+					"name": "Dark Blue",
+					"slug": "dark-blue"
 				}
 			],
 			"text": true
@@ -405,7 +425,7 @@
 		},
 		"color": {
 			"background": "var(--wp--preset--color--base)",
-			"text": "var(--wp--preset--color--contrast)"
+			"text": "var(--wp--preset--color--primary)"
 		},
 		"elements": {
 			"button": {
