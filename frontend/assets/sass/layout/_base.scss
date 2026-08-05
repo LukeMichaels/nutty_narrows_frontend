@@ -44,10 +44,21 @@ h1 {
   font-size: 32px;
 }
 
-// ol {
-//   list-style-type: decimal;
-// }
+ol {
+  list-style-type: decimal;
+}
 
 strong {
   color: $color-black;
 }
+
+.wp-block-heading {
+  max-width: 500px;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+
+  &.has-large-font-size {
+    font-size: 1.75rem;
+  }
+} // .wp-block-heading

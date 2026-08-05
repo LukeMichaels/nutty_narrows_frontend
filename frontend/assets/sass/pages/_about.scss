@@ -11,12 +11,7 @@
     color: $color-black;
   }
 
-  .wp-block-columns {
-    
-  }
-
   .wp-block-column {
-    //max-width: 400px;
 
     .wp-block-image {
       margin: 20px 0;
@@ -57,15 +52,6 @@
       max-width: 100%;
       height: auto;
       border-radius: 4px;
-    }
-
-    .wp-block-heading {
-      font-size: 1.5rem;
-      margin-bottom: 16px;
-
-      &.has-large-font-size {
-        font-size: 1.75rem;
-      }
     }
 
     p {

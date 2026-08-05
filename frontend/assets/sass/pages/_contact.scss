@@ -11,6 +11,10 @@
     color: $color-purple;
   }
 
+  &__info {
+    margin-bottom: 30px;
+  }
+
   .contact-form {
     display: flex;
     flex-direction: column;

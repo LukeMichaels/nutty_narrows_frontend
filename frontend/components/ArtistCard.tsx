@@ -11,7 +11,7 @@ export default function ArtistCard({ artist }: { artist: ArtistEntry }) {
           alt={artist.image.node.altText || artist.name || ""}
         />
       )}
-      {artist.name && <h2 className="artist-card__name">{artist.name}</h2>}
+      {artist.name && <h3 className="artist-card__name">{artist.name}</h3>}
       {artist.link && (
         <a
           className="artist-card__website"
