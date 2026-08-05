@@ -74,6 +74,9 @@ footer {
   }
 
   .social-links {
+    justify-content: center;
+    width: 100%;
+
     a {
       position: relative;
       display: inline-block;
@@ -87,6 +90,7 @@ footer {
       transition: background-size .5s, color .5s;
       &:hover,
       &.is-active {
+        color: $color-purple;
         background-size: 100% 100%;
       }
     } 
