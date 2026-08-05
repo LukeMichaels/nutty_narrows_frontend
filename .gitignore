@@ -50,3 +50,4 @@ wp-config.php
 # uncomment the next line
 #/wp-content/themes
 /.well-known
+/wp-content/themes/Nutty_Narrows/config.codekit3
