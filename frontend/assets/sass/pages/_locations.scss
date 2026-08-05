@@ -77,6 +77,7 @@
     border-radius: .25rem;
     cursor: pointer;
     transition: 0.25s;
+    text-decoration: none !important;
     font-weight: $font-body-bold;
     &:hover,
     &:focus {
