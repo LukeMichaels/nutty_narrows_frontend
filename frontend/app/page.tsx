@@ -12,8 +12,13 @@ const FALLBACK_SUBHEADING =
 const FALLBACK_DESCRIPTION =
   "A creative vending machine business — art, trinkets, movies, and more.";
 
+// The slug of WordPress's static front page — this differs per
+// environment (each WordPress install named its front page differently),
+// so it's configured rather than hardcoded. See .env.local.example.
+const HOME_SLUG = process.env.WORDPRESS_HOME_SLUG || "home";
+
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await getYoastSeo("home", {
+  const seo = await getYoastSeo(HOME_SLUG, {
     title: FALLBACK_TITLE,
     description: FALLBACK_DESCRIPTION,
   });
@@ -31,8 +36,8 @@ export default async function HomePage() {
     // the copy above rather than breaking the homepage if that page isn't
     // set up yet or WordPress is unreachable.
     const [page, seo] = await Promise.all([
-      getPage("home"),
-      getYoastSeo("home", { title: FALLBACK_TITLE, description: FALLBACK_DESCRIPTION }),
+      getPage(HOME_SLUG),
+      getYoastSeo(HOME_SLUG, { title: FALLBACK_TITLE, description: FALLBACK_DESCRIPTION }),
     ]);
     if (page) {
       title = page.title || FALLBACK_TITLE;
