@@ -5,7 +5,7 @@ The headless frontend for [Nutty Narrows Thrift Shop](https://nuttynarrows.com/)
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack, React 19)
-- **WPGraphQL** + **WooGraphQL** — product and page content
+- **WPGraphQL** product and page content
 - **Sass (7-1 architecture)** in `assets/sass/` for hand-styled components/pages, plus **Tailwind** utility classes for layout-level styling
 
 ## Prerequisites
@@ -53,4 +53,4 @@ proxy.ts              Runs before every request; enforces the coming-soon gate
 
 ## Deployment
 
-The frontend deploys to Vercel; WordPress stays on its own host (see the repo root). Point `WORDPRESS_API_URL` at your production WordPress subdomain (e.g. `https://wp.nightlights.club/graphql`) and `SITE_URL` at the production domain in Vercel's environment variables.
+The frontend deploys to Vercel; WordPress stays on its own host (see the repo root). Point `WORDPRESS_API_URL` at your production WordPress subdomain (e.g. `https://wp.nuttynarrows.com/graphql`) and `SITE_URL` at the production domain in Vercel's environment variables.
