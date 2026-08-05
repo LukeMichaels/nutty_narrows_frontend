@@ -42,8 +42,11 @@ wp-config.php
 # rather than hand-edited, so treated like a dependency and left untracked.
 /wp-content/plugins
 
+/frontend/design
+
 # All themes
 #
 # Note: If you wish to whitelist themes,
 # uncomment the next line
 #/wp-content/themes
+/.well-known

@@ -11,8 +11,8 @@
   flex-direction: column;
   gap: 16px;
   padding: 20px;
-  background-color: $black;
-  border-top: 1px solid rgba($white, 0.15);
+  background-color: $color-purple;
+  border-top: 1px solid rgba($color-yellow, 0.15);
 
   @include respond-to(b-768) {
     flex-direction: row;
@@ -27,11 +27,15 @@
     line-height: 1.5;
 
     a {
-      color: $pink;
+      // $color-teal only clears ~4.1:1 against this banner's $color-purple
+      // background — just under WCAG's 4.5:1 floor for normal-size text.
+      // $color-yellow (already the focus-ring color right below) clears
+      // 6.8:1 and matches the accent color used elsewhere on this bg.
+      color: $color-yellow;
       text-decoration: underline;
 
       &:focus-visible {
-        outline: 2px solid $pink;
+        outline: 2px solid $color-yellow;
         outline-offset: 2px;
       }
     }
@@ -57,13 +61,16 @@
       margin-top: 3px;
 
       &:focus-visible {
-        outline: 2px solid $pink;
+        outline: 2px solid $color-yellow;
         outline-offset: 2px;
       }
     }
 
     strong {
-      color: $pink;
+      // $color-purple would be invisible here — this banner's own
+      // background is $color-purple (1:1 contrast). Matches the link
+      // color right above, which does contrast against it (6.8:1).
+      color: $color-yellow;
     }
   }
 
@@ -76,10 +83,10 @@
 
   &__button {
     padding: 10px 20px;
-    border: 1px solid rgba($white, 0.25);
+    border: 1px solid rgba($color-white, 0.25);
     border-radius: 4px;
     background: transparent;
-    color: $white;
+    color: $color-white;
     font: inherit;
     font-size: 0.9rem;
     white-space: nowrap;
@@ -90,14 +97,14 @@
     }
 
     &:focus-visible {
-      outline: 2px solid $pink;
+      outline: 2px solid $color-yellow;
       outline-offset: 2px;
     }
 
     &--primary {
-      color: $black;
-      background-color: $pink;
-      border-color: $pink;
+      color: $color-purple;
+      background-color: $color-yellow;
+      border-color: $color-yellow;
     }
   }
 }

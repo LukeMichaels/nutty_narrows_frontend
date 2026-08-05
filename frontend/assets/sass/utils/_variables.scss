@@ -1,14 +1,28 @@
 @use "sass:map";
 @use "sass:meta";
 
-$white: #FFFFFF;
-$black: #0F1729;
-$blue: #3ABBEC;
-$pink: #CF69A8;
-$yellow: #F9ED32;
+$color-white: #FFFFFF;
+$color-black: #0F1729;
+$color-teal: #6acfc3; // don't use on light bg
+$color-purple: #614880; // must be bold on light bg
+$color-green: #9de565; // don't use on light bg
+$color-orange: #d2863a; // don't use on light bg
+$color-pink: #f47884; // don't use on light bg
+$color-light-pink: #F7BBCC;
+$color-yellow: #f5f5bf; // don't use on light bg
+$color-blue: #abf4f5; // don't use on light bg
+$color-dark-blue: #6c8bda; // don't use on light bg
 $error: #7a1f1f;
 
-$site-margins: 1240px;
+$site-margins: 1100px;
+
+// Adobe (Typekit) fonts (see the <link> in app/layout.tsx)
+$font-body: neue-haas-grotesk-text, sans-serif;
+$font-heading: hoss-round-slab, sans-serif;
+$font-body-regular: 400;
+$font-body-bold: 700;
+$font-heading-bold: 600;
+
 
 // Breakpoints
 $breakpoints: (

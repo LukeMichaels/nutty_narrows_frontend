@@ -48,7 +48,7 @@ export default function ContactForm() {
 
   if (status === "sent") {
     return (
-      <p className="contact-form__success">
+      <p role="status" className="contact-form__success">
         Thanks for reaching out — we&apos;ll get back to you soon.
       </p>
     );
@@ -110,7 +110,11 @@ export default function ContactForm() {
         />
       </label>
 
-      {error && <p className="contact-form__error">{error}</p>}
+      {error && (
+        <p role="alert" className="contact-form__error">
+          {error}
+        </p>
+      )}
 
       <button type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? "Sending..." : "Send"}

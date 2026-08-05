@@ -4,7 +4,7 @@
     {
       "name" : "Process All Remaining Files and Folders",
       "stepType" : 1,
-      "uuidString" : "F24C035A-9444-42C4-B028-E4332E29F839"
+      "uuidString" : "505B2775-EF77-451F-83BE-B3652216D4E5"
     }
   ],
   "creatorBuild" : "34689",
@@ -32,10 +32,10 @@
     "\/assets\/sass\/global.scss" : {
       "aP" : 0,
       "bl" : 0,
-      "co" : 1,
+      "co" : 0,
       "ec" : 1,
       "ft" : 4,
-      "ma" : 1,
+      "ma" : 0,
       "oA" : 0,
       "oAP" : "\/assets\/css\/global.css",
       "oF" : 2,
@@ -51,19 +51,6 @@
       "ma" : 0,
       "oA" : 1,
       "oAP" : "\/assets\/sass\/pages\/_base.css",
-      "oF" : 0,
-      "oS" : 0,
-      "pg" : 0
-    },
-    "\/assets\/sass\/pages\/_mailpoet.scss" : {
-      "aP" : 0,
-      "bl" : 0,
-      "co" : 0,
-      "ec" : 1,
-      "ft" : 4,
-      "ma" : 0,
-      "oA" : 1,
-      "oAP" : "\/assets\/sass\/pages\/_mailpoet.css",
       "oF" : 0,
       "oS" : 0,
       "pg" : 0
@@ -175,7 +162,7 @@
     },
     "\/screenshot.png" : {
       "ft" : 32768,
-      "iS" : 60734,
+      "iS" : 240191,
       "oA" : 0,
       "oAP" : "\/screenshot.png",
       "oF" : 0,
@@ -214,28 +201,12 @@
       "oAP" : "\/templates\/index.html",
       "oF" : 0
     },
-    "\/templates\/page-checkout.html" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/templates\/page-checkout.html",
-      "oF" : 0
-    },
     "\/templates\/page.html" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/templates\/page.html",
-      "oF" : 0
-    },
-    "\/templates\/single-mailpoet_page.html" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/templates\/single-mailpoet_page.html",
       "oF" : 0
     },
     "\/theme.json" : {
@@ -254,16 +225,16 @@
 
   },
   "projectAttributes" : {
-    "creationDate" : 796078876.01197803,
-    "displayValue" : "Night_Lights",
+    "creationDate" : 807582533.279176,
+    "displayValue" : "Nutty_Narrows",
     "displayValueWasSetByUser" : 0,
-    "iconImageName" : "meme-wonka",
+    "iconImageName" : "meme-owl",
     "iconImageWasSetByUser" : 1
   },
   "projectSettings" : {
     "abortBuildOnError" : 1,
     "allowInjectionReloads" : 1,
-    "alwaysUseExternalServer" : 0,
+    "alwaysUseExternalServer" : 1,
     "animateCSSInjections" : 1,
     "autoBuildNewItems" : 1,
     "autoprefixerEnableIEGrid" : 0,
@@ -1513,7 +1484,7 @@
       }
     },
     "esLintSourceType" : 0,
-    "externalServerAddress" : "http:\/\/localhost:8888",
+    "externalServerAddress" : "https:\/\/nuttynarrows:8890",
     "gitIgnoreBuildFolder" : 1,
     "hideConfigFile" : 0,
     "jsCheckerReservedNamesString" : "",

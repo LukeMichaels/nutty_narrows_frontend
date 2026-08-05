@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import WpPage from "@/components/WpPage";
+import { getLocationsPage } from "@/lib/wordpress";
+import LocationList from "@/components/LocationList";
 
 export const dynamic = "force-dynamic";
 
@@ -8,9 +9,24 @@ export const metadata: Metadata = {
   description: "Find a Nutty Narrows vending machine near you and get directions.",
 };
 
-// Thin WpPage wrapper for now — will be replaced with a real locations list
-// (address, map, directions link per machine) once ACF fields for locations
-// exist.
-export default function LocationsPage() {
-  return <WpPage slug="locations" className="about-page" />;
+export default async function LocationsPage() {
+  const page = await getLocationsPage();
+  const locations = page?.locations?.locations ?? [];
+
+  return (
+    <main id="main-content" tabIndex={-1} className="locations-page">
+      <div className="page-content-wrap">
+        <h1>{page?.title ?? "Locations"}</h1>
+
+        {page?.content && (
+          <div
+            className="locations-page__intro"
+            dangerouslySetInnerHTML={{ __html: page.content }}
+          />
+        )}
+
+        <LocationList locations={locations} />
+      </div>
+    </main>
+  );
 }

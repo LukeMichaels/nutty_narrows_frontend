@@ -1,33 +1,52 @@
 @use "../utils/variables" as *;
 @use "../utils/mixins" as *;
 
-body {
-  background-color: $black;
-  color: $white;
+// .full-bleed elements use width: 100vw, which includes the scrollbar
+// gutter on desktop — a few px wider than the actual visible viewport.
+// Rather than patch that calc (fragile, repeats for any future full-bleed
+// use), just prevent horizontal scroll outright at the root.
+html {
+  overflow-x: hidden;
 }
 
-.site-margins {
+body {
+  font-family: $font-body;
+  font-weight: 400;
+  background-color: $color-yellow;
+  color: $color-black;
+  overflow-x: hidden;
+}
+
+.site-margins, .page-content-wrap {
   width: 100%;
   max-width: $site-margins;
   position: relative;
-  padding: 40px 40px;
+  padding: 0 30px;
   margin: 0 auto;
   z-index: 2;
-  background-color: $black;
 }
 
-.pink {
-  color: $pink;
+.page-content-wrap {
+  padding: 40px 30px 60;
+  
+  h1 {
+    margin: 0 0 20px;
+  }
 }
 
-.blue {
-  color: $blue;
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: $font-heading-bold;
 }
 
 h1 {
-  color: $blue;
+  // $color-teal (the previous value) is documented in _variables.scss as
+  // "don't use on light bg" — it measures ~1.65:1 against $color-yellow
+  // (the homepage/legal-page background), badly failing WCAG's 3:1 floor
+  // for large text. $color-black clears every page background this site
+  // actually uses (checked against orange/pink/blue/yellow: 6.1–15.9:1).
+  color: $color-black;
   font-size: 32px;
-  font-weight: 700;
 }
 
 // ol {
@@ -35,5 +54,7 @@ h1 {
 // }
 
 strong {
-  color: $pink;
+  // Same contrast issue as h1 above — <strong> can appear inline in
+  // WP-authored body content on any page background.
+  color: $color-black;
 }

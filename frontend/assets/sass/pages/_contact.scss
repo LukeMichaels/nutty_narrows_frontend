@@ -3,51 +3,65 @@
 
 .contact-page {
   width: 100%;
+  flex: 1;
+  color: $color-purple;
+  background-color: $color-blue;
 
-  > h1 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+  h1, h2, h3, p, a, a:hover, ul, ol, label {
+    color: $color-purple;
   }
 
-  &__info {
-    margin-bottom: 40px;
-    line-height: 1.6;
-
-    p {
-      margin-bottom: 12px;
-    }
-
-    a {
-      color: $pink;
-      text-decoration: underline;
-    }
-  }
+//   &__info {
+//     margin-bottom: 20px;
+//     line-height: 1.6;
+// 
+//     p {
+//       margin-bottom: 12px;
+//     }
+// 
+//     a {
+//       color: $color-purple;
+//       text-decoration: underline;
+//     }
+//   }
 
   .contact-form {
     width: 100%;
 
     &__field {
       width: 100%;
+      max-width: 500px;
+      font-weight: $font-body-bold;
+    }
+
+    label span {
+      font-weight: $font-body-bold;
+    }
+
+    input, select, textarea {
+      color: $color-purple;
+      border: 3px solid $color-purple;
+      font-weight: $font-body-bold;
     }
 
     button {
-      width: 100%;
-      position: relative;
-      display: inline-block;
-      padding-block: calc(var(--spacing) * 3);
-      color: $white;
-      background-color: $pink;
-      background-image: linear-gradient($blue, $blue);
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: 0% 0%;
-      transition: background-size .5s, color .5s;
+      padding: 1em 2em;
+      color: $color-purple;
+      background: none;
+      border: 2px solid $color-purple;
+      box-shadow: 
+        0.3em 0.3em 0 0 $color-purple,
+        inset 0.3em 0.3em 0 0 $color-purple;
       border-radius: .25rem;
       cursor: pointer;
+      transition: 0.25s;
+      font-weight: $font-body-bold;
       &:hover,
-      &.is-active {
-        color: $black;
-        background-size: 100% 100%;
+      &:focus {
+        color: $color-yellow;
+        box-shadow: 
+          0 0 0 0 $color-purple,
+          inset 6em 3.5em 0 0 $color-purple;
       }
     }
 

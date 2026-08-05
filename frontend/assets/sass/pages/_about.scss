@@ -2,10 +2,21 @@
 @use "../utils/mixins" as *;
 
 .about-page {
+  flex: 1;
   width: 100%;
+  color: $color-black;
+  background-color: $color-orange;
 
-  .about-image-column {
-    max-width: 400px;
+  h1, h2, h3, p, a, a:hover, ul, ol {
+    color: $color-black;
+  }
+
+  .wp-block-columns {
+    
+  }
+
+  .wp-block-column {
+    //max-width: 400px;
 
     .wp-block-image {
       margin: 20px 0;
@@ -18,13 +29,11 @@
     }
 
     .wp-element-caption {
-      color: $pink;
+      // $color-teal fails contrast against this page's $color-orange
+      // background (~1.6:1 — WCAG needs 4.5:1 for normal-size text).
+      color: $color-black;
     }
   } // .about-image-column 
-
-  h1 {
-    margin-bottom: 40px;
-  }
 
   &__content {
     display: flex;
@@ -62,17 +71,14 @@
     }
 
     p {
-      line-height: 1.6;
       margin-bottom: 16px;
+      line-height: 1.6;
 
       &:last-child {
         margin-bottom: 0;
       }
     }
 
-    .has-primary-color {
-      color: $pink;
-    }
 
   } // &__content
 

@@ -61,3 +61,124 @@ export async function getPage(uri: string): Promise<Page | null> {
   const data = getResponseData(response, "GetPage");
   return data.page;
 }
+
+// Artists and Locations are both plain WordPress Pages (slugs "artists" /
+// "locations") carrying an ACF repeater field group built directly in
+// wp-admin (Custom Fields > Field Groups) — not a custom post type or ACF
+// Block. Each repeater row is one artist / one machine location. This
+// mirrors how every other page's content is edited, so there's a single,
+// consistent authoring experience instead of a separate admin screen per
+// content type.
+//
+// Both field groups nest a repeater field inside a group field with the
+// same GraphQL name (set that way in the ACF UI), which is why the query
+// shape below has a doubled-up "artists { artists { ... } }" /
+// "locations { locations { ... } }" — that's not a typo.
+export type AcfImage = {
+  node: {
+    sourceUrl: string;
+    altText: string;
+  };
+} | null;
+
+export type AcfLink = {
+  url: string;
+  title: string | null;
+  target: string | null;
+} | null;
+
+export type ArtistEntry = {
+  name: string | null;
+  bio: string | null;
+  link: AcfLink;
+  image: AcfImage;
+};
+
+export type ArtistsPage = {
+  title: string;
+  content: string | null;
+  artists: {
+    artists: ArtistEntry[] | null;
+  } | null;
+};
+
+const GET_ARTISTS_PAGE = gql`
+  query GetArtistsPage {
+    page(id: "artists", idType: URI) {
+      title
+      content
+      artists {
+        artists {
+          name
+          bio
+          link {
+            url
+            title
+            target
+          }
+          image {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export async function getArtistsPage(): Promise<ArtistsPage | null> {
+  const client = getClient();
+  const response = await client.rawRequest<{ page: ArtistsPage | null }>(
+    GET_ARTISTS_PAGE
+  );
+  const data = getResponseData(response, "GetArtistsPage");
+  return data.page;
+}
+
+export type LocationEntry = {
+  title: string | null;
+  address: string | null;
+  notes: string | null;
+  image: AcfImage;
+};
+
+export type LocationsPage = {
+  title: string;
+  content: string | null;
+  locations: {
+    locations: LocationEntry[] | null;
+  } | null;
+};
+
+const GET_LOCATIONS_PAGE = gql`
+  query GetLocationsPage {
+    page(id: "locations", idType: URI) {
+      title
+      content
+      locations {
+        locations {
+          title
+          address
+          notes
+          image {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export async function getLocationsPage(): Promise<LocationsPage | null> {
+  const client = getClient();
+  const response = await client.rawRequest<{ page: LocationsPage | null }>(
+    GET_LOCATIONS_PAGE
+  );
+  const data = getResponseData(response, "GetLocationsPage");
+  return data.page;
+}

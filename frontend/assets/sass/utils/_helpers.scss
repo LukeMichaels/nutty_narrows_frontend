@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 /**
  * Clear inner floats
  */
@@ -54,4 +56,37 @@
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+}
+
+/**
+ * "Skip to main content" — off-screen until focused, then a keyboard user
+ * tabbing in from the address bar can jump straight past the header/nav
+ * (repeated on every page) to the actual page content instead of having
+ * to tab through it every single time.
+ */
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 8px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background-color: $color-purple;
+  color: $color-yellow;
+  border-radius: 0 0 6px 6px;
+  font-weight: $font-body-bold;
+  text-decoration: none;
+  transition: top 0.15s ease;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+// The skip-link's target needs tabindex="-1" to actually receive focus
+// (not just scroll into view) when jumped to — see each page's <main
+// id="main-content" tabIndex={-1}>. No visible focus ring is needed there;
+// landing on it is already conveyed by the scroll position and the
+// landmark announcement.
+main:focus {
+  outline: none;
 }

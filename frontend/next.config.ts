@@ -26,6 +26,34 @@ const nextConfig: NextConfig = {
     // stays off (and the guard stays active) in production.
     dangerouslyAllowLocalIP: process.env.NODE_ENV !== "production",
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          // This site is never meant to be framed by anyone.
+          { key: "X-Frame-Options", value: "DENY" },
+          // Stops the browser from ever guessing/upgrading a response's
+          // MIME type (e.g. treating an uploaded file as executable JS).
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          // Sends the full referring URL only to our own origin; other
+          // sites just see the scheme+host, not the path/query.
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          // Explicitly opt out of browser features this site never uses.
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+          // A locked-down Content-Security-Policy isn't set here: this app
+          // renders many inline SVG <style> blocks as plain JSX text (not
+          // dangerouslySetInnerHTML) and relies on Next.js's own inline
+          // hydration bootstrap script, so a real CSP needs a nonce-based
+          // setup that's worth its own dedicated pass rather than
+          // bolting on something untested right before launch.
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

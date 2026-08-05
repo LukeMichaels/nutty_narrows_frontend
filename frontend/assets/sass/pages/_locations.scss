@@ -1,0 +1,91 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.locations-page {
+  width: 100%;
+  flex: 1;
+  color: $color-purple;
+  background-color: $color-yellow;
+
+  h1, h3, p, ul, ol {
+    color: $color-purple;
+  }
+
+  &__intro {
+    margin-bottom: 30px;
+
+    p {
+      line-height: 1.6;
+    }
+  }
+}
+
+.location-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+
+  @include respond-to(b-640) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.location-list__empty {
+  color: $color-purple;
+}
+
+.location-card {
+  display: flex;
+  flex-direction: column;
+  //gap: 8px;
+  //padding: 24px;
+  border: 1px solid rgba($color-white, 0.15);
+  border-radius: 8px;
+
+  &__photo {
+    width: 100%;
+    margin-bottom: 10px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  &__label {
+    margin-bottom: 2px;
+    color: $color-purple;
+    font-size: 1.25rem;
+  }
+
+  &__address {
+    margin-bottom: 2px;
+    color: $color-purple;
+    font-style: normal;
+  }
+
+  &__notes {
+    margin-bottom: 15px;
+    color: $color-purple;
+    font-style: italic;
+  }
+
+  &__directions {
+    padding: 1em 2em;
+    color: $color-purple;
+    background: none;
+    border: 2px solid $color-purple;
+    box-shadow: 
+      0.3em 0.3em 0 0 $color-purple,
+      inset 0.3em 0.3em 0 0 $color-purple;
+    border-radius: .25rem;
+    cursor: pointer;
+    transition: 0.25s;
+    font-weight: $font-body-bold;
+    &:hover,
+    &:focus {
+      color: $color-yellow;
+      box-shadow: 
+        0 0 0 0 $color-purple,
+        inset 6em 3.5em 0 0 $color-purple;
+    }
+  }
+}

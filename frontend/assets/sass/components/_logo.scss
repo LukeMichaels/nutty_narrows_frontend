@@ -1,8 +1,6 @@
 @use "../utils/variables" as *;
 @use "../utils/mixins" as *;
 
-// Placeholder text wordmark styling — replace once the real logo mark
-// (Phase 3) exists.
 .wrap {
   display: flex;
   align-items: center;
@@ -10,12 +8,34 @@
   text-decoration: none;
 }
 
+// Two real logo marks (LogoFull/LogoCompact) — CSS swaps which one is
+// visible at the same b-720 breakpoint the header already uses to switch
+// from the mobile hamburger to inline nav-links.
 .header {
-  color: $blue;
-  font-size: 1.5rem;
+  .logo-compact {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
+
+  .logo-full {
+    display: none;
+    height: 36px;
+    width: auto;
+  }
+
+  @include respond-to(b-720) {
+    .logo-compact {
+      display: none;
+    }
+
+    .logo-full {
+      display: block;
+    }
+  }
 }
 
 .footer {
-  color: $black;
+  color: $color-black;
   font-size: 1.25rem;
 }

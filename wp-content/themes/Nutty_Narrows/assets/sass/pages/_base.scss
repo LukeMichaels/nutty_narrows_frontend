@@ -2,8 +2,8 @@
 @use "../utils/mixins" as *;
 
 body {
-  color: $white;
-  background-color: $black;
+  color: $color-purple;
+  background-color: $color-light-pink;
 }
 
 header {
@@ -11,91 +11,15 @@ header {
   justify-content: center;
   align-items: center;
   padding: 0 20px;
-  background-color: $black;
-}
-
-.nl-checkout-logo {
-  display: block;
-  width: 100px;
-  margin: 0 auto;
-
-  svg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .st0 {
-    stroke: $pink;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 5.7px;
-  }
-
-  .st1 {
-    fill: $pink;
-  }
-
-  .st2 {
-    fill: $blue;
-  }
-
-  &--footer {
-    .st0,
-    .st1,
-    .st2 {
-      stroke: $black;
-      fill: $black;
-    }
-
-    .st0 {
-      fill: none;
-    }
-  }
+  background-color: $color-yellow;
 }
 
 main {
   max-width: $site-margins;
   margin: 0 auto;
   padding: 0 20px;
-  background-color: $black;
+  background-color: $color-light-pink;
 }
-
-.woocommerce-page main {
-  max-width: $site-margins !important;
-  margin: 0 auto;
-  padding: 0 20px;
-  background-color: $black;
-}
-
-// Targets the checkout page's own content group block. WP auto-generates
-// this class from the block's layout settings, so it isn't a stable
-// selector — if checkout's content block structure changes in the editor,
-// this may need to be re-matched against the new generated class.
-.wp-container-core-group-is-layout-857ef822 {
-  max-width: $site-margins !important;
-  margin: 0 auto;
-  padding: 0 20px;
-  background-color: $black;
-
-  .wp-block-column {
-
-    h1 {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    p {
-      max-width: 600px;
-      margin: 0 auto 20px;
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-    }
-
-  } // .wp-block-column
-
-} // .wp-container-core-group-is-layout-857ef822
 
 footer .wp-block-group {
   display: flex;
@@ -103,39 +27,26 @@ footer .wp-block-group {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: $pink;
+  background-color: $color-purple;
 }
 
 a {
-  color: $pink;
+  color: $color-purple;
+  text-decoration: underline;
 
   &:hover {
-    color: $blue;
+    color: $color-purple;
   }
 
 }
 
-button, .wc-block-components-button, .wp-element-button {
+button, .wp-element-button {
 
   &:hover {
-    color: $white;
-    background-color: $blue;
+    color: $color-white;
+    background-color: $color-purple;
   }
 
-}
-
-.wc-block-components-drawer__screen-overlay--with-slide-in .wc-block-components-drawer {
-  z-index: 10;
-}
-
-.wc-block-components-form .wc-block-components-text-input label, .wc-block-components-text-input label {
-  color: $pink;
-}
-
-// Deliberately hidden: Stripe's Express Checkout button (Apple/Google Pay)
-// looked out of place against the custom checkout styling.
-.wp-block-group #wc-stripe-express-checkout-element {
-  display: none;
 }
 
 .site-margins {
@@ -145,51 +56,51 @@ button, .wc-block-components-button, .wp-element-button {
   padding: 40px 40px;
   margin: 0 auto;
   z-index: 2;
-  background-color: $black;
+  background-color: $color-light-pink;
 }
 
 .pink {
-  color: $pink;
+  color: $color-pink;
 }
 
 .blue {
-  color: $blue;
+  color: $color-blue;
 }
 
 .black {
-  color: $black;
+  color: $color-black;
 }
 
 h1 {
-  color: $blue;
+  color: $color-purple;
   font-size: 32px;
   font-weight: 700;
 }
 
 p {
   margin-bottom: 20px;
-  color: $white;
+  color: $color-purple;
 }
 
 a {
-  color: rgba($white, 0.6);
+  color: $color-purple;
+  text-decoration: underline;
 
   &:hover {
-    color: $pink;
-    text-decoration: underline;
+    color: $color-purple;
   }
 }
 
 h2 {
   margin-bottom: 5px;
-  color: $blue;
+  color: $color-purple;
   font-size: 22px;
   font-weight: 700;
 }
 
 h3 {
   margin-bottom: 5px;
-  color: $blue;
+  color: $color-purple;
   font-size: 18px;
   font-weight: 700;
 }
@@ -201,61 +112,16 @@ ul {
   li {
     text-indent: -1em;
     padding-left: 1em;
-    color: $white;
+    color: $color-purple;
   }
 }
 
-// ol {
-//   list-style-type: decimal;
-// }
-
 strong {
-  color: $pink;
+  color: $color-purple;
 }
 
 .is-layout-constrained {
   h1 {
     text-align: center;
-  }
-}
-
-
-.wc-block-grid__products {
-  justify-content: center;
-}
-.wc-block-components-button, .wc-block-checkout__actions .wc-block-checkout__actions_row .wc-block-components-checkout-place-order-button--full-width, .wc-block-grid__product-add-to-cart.wp-block-button .wp-block-button__link {
-  width: auto;
-  align-self: flex-start;
-  position: relative;
-  display: inline-block;
-  padding-block: calc(.25rem * 3);
-  padding-inline: calc(.25rem * 6);
-  color: $black;
-  background-color: $pink;
-  background-image: linear-gradient($blue, $blue);
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: 0% 0%;
-  transition: background-size .5s, color .5s;
-  border-radius: .25rem;
-  cursor: pointer;
-  text-align: center;
-  text-indent: 0;
-  &:hover,
-  &.is-active {
-    color: $black;
-    background-size: 100% 100%;
-    text-decoration: none;
-  }
-}
-
-.wc-block-components-order-summary .wc-block-components-order-summary-item__quantity span {
-  color: $black;
-}
-
-.wc-block-cart-item__wrap {
-  .wc-block-components-product-name {
-    color: $pink;
-    font-weight: 600;
   }
 }

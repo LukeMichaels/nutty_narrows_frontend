@@ -18,14 +18,16 @@ export default async function WpPage({
   }
 
   return (
-    <main className={className}>
-      <h1>{page.title}</h1>
-      {page.content && (
-        <div
-          className={`${className}__content`}
-          dangerouslySetInnerHTML={{ __html: page.content }}
-        />
-      )}
+    <main id="main-content" tabIndex={-1} className={className}>
+      <div className="page-content-wrap">
+        <h1>{page.title}</h1>
+        {page.content && (
+          <div
+            className={`${className}__content`}
+            dangerouslySetInnerHTML={{ __html: page.content }}
+          />
+        )}
+      </div>
     </main>
   );
 }

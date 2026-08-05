@@ -5,10 +5,11 @@
 // and a numbered list pulled straight from wp-admin.
 .legal-page {
   width: 100%;
-  padding: 40px 0;
+  color: $color-purple;
+  background-color: $color-light-pink;
 
-  > h1 {
-    margin-bottom: 40px;
+  h1, h2, h3, p, a, a:hover, ul, ol, label, strong, em {
+    color: $color-purple;
   }
 
   &__content {
@@ -31,12 +32,11 @@
     }
 
     a {
-      color: $pink;
       text-decoration: underline;
     }
 
     strong {
-      color: $pink;
+      font-weight: $font-body-bold;
     }
   }
 }

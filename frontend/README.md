@@ -1,20 +1,17 @@
-# Night Lights Frontend
+# Nutty Narrows Thrift Shop Frontend
 
-The headless storefront for [Night Lights](https://nightlights.club). This is a Next.js (App Router) app that reads content and products from a WordPress/WooCommerce backend over WPGraphQL, and talks to WooCommerce's REST Store API for the cart.
+The headless frontend for [Nutty Narrows Thrift Shop](https://nuttynarrows.com/). This is a Next.js (App Router) app that reads content from a WordPress backend over WPGraphQL.
 
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack, React 19)
 - **WPGraphQL** + **WooGraphQL** — product and page content
-- **WooCommerce Store API** — cart (guest sessions via a signed Cart-Token, no cookies required)
-- **A custom mu-plugin** (`wp-content/mu-plugins/night-lights-account-api.php`) — account register/login/orders/contact-form, since WordPress has no first-party cross-origin-safe auth. Uses a hand-rolled JWT, set via httpOnly cookies through this app's own Route Handlers (`app/api/**`), so the browser never talks to WordPress directly.
 - **Sass (7-1 architecture)** in `assets/sass/` for hand-styled components/pages, plus **Tailwind** utility classes for layout-level styling
-- Checkout is intentionally simple: the React cart hands off to WooCommerce's own hosted checkout for address/payment, then returns to `/thank-you`.
 
 ## Prerequisites
 
 - Node.js 20+
-- A running WordPress install with WooCommerce, WPGraphQL, and WooGraphQL active (already vendored under `../wp-content/plugins`), and the account-api mu-plugin present under `../wp-content/mu-plugins`
+- A running WordPress install with WPGraphQL
 
 ## Getting started
 
@@ -33,9 +30,6 @@ Open [http://localhost:3000](http://localhost:3000).
 | --- | --- |
 | `WORDPRESS_API_URL` | URL of the WPGraphQL endpoint (e.g. `https://your-site.local/graphql`). Also used to derive the allowed image host for `next/image`. |
 | `SITE_URL` | Public URL of this frontend, used in `robots.txt` and `sitemap.xml`. |
-| `COMING_SOON` | Set to `true` to gate the entire site behind a splash page (see below). Defaults to `false`. |
-
-In production (Vercel), set these under Project → Settings → Environment Variables rather than committing `.env.local` — see [Deployment](#deployment).
 
 ## Scripts
 
@@ -51,17 +45,11 @@ In production (Vercel), set these under Project → Settings → Environment Var
 ```
 app/                  Routes (App Router — one folder per route, page.tsx per screen)
   api/                Route Handlers that proxy the browser to WordPress (auth cookies, cart, contact)
-  coming-soon/         Pre-launch splash page
-  products/[slug]/     Product detail
 components/           Shared UI (Header, Footer, ProductGallery, forms, etc.)
 lib/                  Data fetching (WPGraphQL, Store API, account API) and React Contexts (cart, auth, cookie consent)
 assets/sass/          7-1 Sass architecture: utils, components, layout, pages
 proxy.ts              Runs before every request; enforces the coming-soon gate
 ```
-
-## Coming-soon mode
-
-Setting `COMING_SOON=true` rewrites every route (except `/api`) to the splash page at `/coming-soon`, sets `robots.txt` to disallow everything, and collapses `sitemap.xml` to just the homepage — so nothing gets indexed before launch. Flip it back to `false` (and redeploy) when the store is ready to go live.
 
 ## Deployment
 

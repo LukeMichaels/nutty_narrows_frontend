@@ -1,0 +1,23 @@
+@use "../utils/variables" as *;
+
+.home-hero {
+  padding: 30px 0 0;
+  text-align: center;
+
+  h1 {
+    margin: 0 0 5px;
+    color: $color-purple;
+  }
+
+  .home-hero__subheading {
+    max-width: 640px;
+    margin: 0 auto;
+    color: $color-purple;
+    font-size: 1.1rem;
+
+    p {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+}

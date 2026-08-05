@@ -29,24 +29,24 @@
     select,
     textarea {
       padding: 10px 12px;
-      border: 1px solid rgba($white, 0.25);
+      border: 1px solid rgba($color-white, 0.25);
       border-radius: 4px;
       background: transparent;
-      color: $white;
+      color: $color-white;
       font: inherit;
 
       &:focus {
-        border-color: $pink;
+        border-color: $color-teal;
       }
 
       &:focus-visible {
-        outline: 2px solid $pink;
+        outline: 2px solid $color-teal;
         outline-offset: 2px;
       }
     }
 
     select option {
-      color: $black;
+      color: $color-black;
     }
   }
 
@@ -55,7 +55,9 @@
   }
 
   &__success {
-    color: $pink;
+    // $color-teal fails contrast against the contact page's $color-blue
+    // background (~1.5:1 — WCAG needs 4.5:1 for normal-size text).
+    color: $color-black;
     font-size: 1.1rem;
   }
 
@@ -64,8 +66,8 @@
     padding: 12px 28px;
     border: none;
     border-radius: 4px;
-    background-color: $pink;
-    color: $white;
+    background-color: $color-teal;
+    color: $color-white;
     font-weight: 500;
     cursor: pointer;
 

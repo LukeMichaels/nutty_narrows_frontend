@@ -1,0 +1,74 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.artists-page {
+  width: 100%;
+  flex: 1;
+  background-color: $color-pink;
+
+  h1, h2, h3, p, a, a:hover, ul, ol {
+    color: $color-black;
+  }
+
+  &__intro {
+    margin-bottom: 40px;
+
+    p {
+      line-height: 1.6;
+    }
+  }
+}
+
+.artist-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+
+  @include respond-to(b-640) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to(b-943) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.artist-grid__empty {
+  color: rgba($color-white, 0.7);
+}
+
+.artist-card {
+  display: flex;
+  flex-direction: column;
+  //gap: 8px;
+
+  &__photo {
+    width: 100%;
+    margin-bottom: 10px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  &__name {
+    margin-bottom: 5px;
+    font-size: 1.25rem;
+  }
+
+  &__bio {
+    line-height: 1.6; 
+
+    p {
+      margin-bottom: 10px;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  } // &__bio
+
+  &__website {
+    align-self: flex-start;
+    color: $color-black;
+    text-decoration: underline;
+  }
+}

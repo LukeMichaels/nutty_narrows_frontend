@@ -13,17 +13,19 @@ export default async function ContactPage() {
   const page = await getPage("contact");
 
   return (
-    <main className="contact-page">
-      <h1>Contact</h1>
-
-      {page?.content && (
-        <div
-          className="contact-page__info"
-          dangerouslySetInnerHTML={{ __html: page.content }}
-        />
-      )}
-
-      <ContactForm />
+    <main id="main-content" tabIndex={-1} className="contact-page">
+      <div className="page-content-wrap">
+        <h1>Contact</h1>
+  
+        {page?.content && (
+          <div
+            className="contact-page__info"
+            dangerouslySetInnerHTML={{ __html: page.content }}
+          />
+        )}
+  
+        <ContactForm />
+      </div>
     </main>
   );
 }

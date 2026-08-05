@@ -1,20 +1,24 @@
 import Link from "next/link";
+import LogoFull from "./LogoFull";
+import LogoCompact from "./LogoCompact";
 
-// Placeholder text wordmark — will be replaced with the real Nutty Narrows
-// logo (the squirrel mark from the vending-machine illustration) once
-// Phase 3 componentizes that artwork.
 export default function Logo({
   variant = "header",
 }: {
   variant?: "header" | "footer";
 }) {
+  if (variant === "footer") {
+    return (
+      <Link href="/" aria-label="Return to the front page" className="wrap footer">
+        <LogoCompact />
+      </Link>
+    );
+  }
+
   return (
-    <Link
-      href="/"
-      aria-label="Return to the front page"
-      className={`wrap ${variant === "footer" ? "footer" : "header"}`}
-    >
-      Nutty Narrows
+    <Link href="/" aria-label="Return to the front page" className="wrap header">
+      <LogoCompact />
+      <LogoFull />
     </Link>
   );
 }

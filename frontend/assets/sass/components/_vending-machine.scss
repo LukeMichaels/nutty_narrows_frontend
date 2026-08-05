@@ -1,26 +1,222 @@
 @use "../utils/variables" as *;
 @use "../utils/mixins" as *;
 
-// Backdrop, art, and interactive overlay all share one source viewBox
-// (see components/machine/machine-items.ts), so this box is locked to that
-// exact aspect ratio and every layer is stretched to fill it 1:1 — that's
-// what keeps the overlay's hit-targets in registration with the artwork at
-// any screen size.
+// The machine is the focal element — it scales independently of the
+// decorative backdrop behind it: edge-to-edge (minus a small margin) on
+// narrow viewports, capped at 75% of $site-margins on wide ones. The scene
+// is a flex column so the floor (a flex-grow child) always reaches
+// whatever comes after it in the document — the footer — with zero gap,
+// regardless of viewport height; no separate viewport-height math needed.
 // Width comes from the .full-bleed utility (100vw) — not redeclared here,
 // so it can't lose a cascade-order tie-break against it.
 .vending-machine-scene {
   position: relative;
-  aspect-ratio: 3816.9 / 2947.4;
-  overflow: hidden;
-  background-color: $black;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  //overflow: hidden;
+  color: $color-purple;
+  background-color: $color-yellow;
+}
 
-  svg {
+.vending-machine-scene__stage {
+  flex-shrink: 0;
+  padding-top: 8%;
+  // Pulls the floor-wrap (next sibling) up by 150px so it overlaps the
+  // machine's own bottom — this doesn't change the floor's rendered
+  // height (still stretches all the way to the footer via its own
+  // flex-grow below), it just moves where that stretch *starts* from,
+  // making the machine look like it's standing 150px into the floor.
+  margin-bottom: -47px;
+}
+
+.scene-backdrop__floor-wrap {
+  position: relative;
+  z-index: 0; // stays behind .vending-machine (z-index: 1) in the overlap band
+  flex: 1 1 auto;
+  height: 230px;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.scene-backdrop__baseboard {
+  flex-shrink: 0;
+  height: 6px;
+  background-color: $color-purple;
+}
+
+.scene-backdrop__floor {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: block;
+  width: 100%;
+  // Safety net: the floor art overflows its own 2560x1440 canvas in most
+  // directions to support "slice" cropping at any aspect ratio, but if a
+  // container shape ever exposes a spot the art doesn't cover, this reads
+  // as another floor tile instead of the tan wall color bleeding through.
+  background-color: $color-black;
+}
+
+.vending-machine {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 60px, 680px); //width: min(calc(100% - 60px), calc(#{$site-margins} * 0.75));
+  aspect-ratio: 1491.1 / 1663.2;
+  margin: 0 auto;
+
+  // Direct-child combinator only — a plain descendant selector here would
+  // also catch .vend-reveal (nested inside .machine-nav via the vend
+  // animation overlay) and stretch/reposition it to fill the machine box,
+  // clobbering its own fixed-viewport sizing in _vend-reveal's rules below.
+  > svg,
+  > .machine-nav {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     display: block;
   }
+}
+
+// On narrow (phone-width) viewports, the keypad rearranges from a 3-
+// column, 2-row grid (A/B/C over 1/2/3) into a 2-column, 3-row grid (A
+// over B over C on the left, 1 over 2 over 3 on the right) — and each
+// button grows to take up 50% of its row's width instead of 33%, so
+// there's a real tap-target size gain from going to fewer columns, not
+// just a rearrangement. Scale is anchored at each button's own original
+// top-left (transform-box: fill-box; transform-origin: 0% 0%), then
+// translated to its target position — since translate is the outer/last-
+// applied function here, it moves the already-scaled button by the exact,
+// unscaled (dx, dy) below, computed as target-position minus original:
+//   A: (1623,-95.5)   -> (1623,-95.5)   dx,dy = (0, 0)
+//   B: (1683.3,-95.5) -> (1623,-9)      dx,dy = (-60.3, 86.5)
+//   C: (1743.6,-95.5) -> (1623,77.5)    dx,dy = (-120.6, 173)
+//   1: (1623,-34.5)   -> (1718,-95.5)   dx,dy = (95, -61)
+//   2: (1683.3,-34.5) -> (1718,-9)      dx,dy = (34.7, 25.5)
+//   3: (1743.6,-34.5) -> (1718,77.5)    dx,dy = (-25.6, 112)
+// (see the A/B/C/_x31_/_x32_/_x33_ groups in VendingMachineArt.tsx). The
+// HTML hit-zone overlay doesn't use CSS transforms at all — MachineNav.tsx
+// switches to KEYPAD_BUTTONS_NARROW (exact target rects, already grown) at
+// this same breakpoint, since a plain translate can't also change a
+// button's size. The screen and its background panel shift/grow to make
+// room below the new, taller 3-row stack.
+@media (max-width: 639px) {
+  .vending-machine {
+    // A bit more width on the smallest screens — the (now larger,
+    // two-column) buttons are easier to hit without crowding the floor/
+    // wall context around the machine too much.
+    width: min(calc(100% - 30px), 680px);
+  }
+
+  .vending-machine-art {
+    #A,
+    #B,
+    #C,
+    #_x31_,
+    #_x32_,
+    #_x33_ {
+      transform-box: fill-box;
+      transform-origin: 0% 0%;
+      transform: scale(1.5);
+    }
+
+    #B {
+      transform: translate(-60.3px, 86.5px) scale(1.5);
+    }
+
+    #C {
+      transform: translate(-120.6px, 173px) scale(1.5);
+    }
+
+    #_x31_ {
+      transform: translate(95px, -61px) scale(1.5);
+    }
+
+    #_x32_ {
+      transform: translate(34.7px, 25.5px) scale(1.5);
+    }
+
+    #_x33_ {
+      transform: translate(-25.6px, 112px) scale(1.5);
+    }
+
+    #Screen {
+      y: 170.1px;
+    }
+
+    #Buttons_Background {
+      transform-box: fill-box;
+      transform-origin: top;
+      transform: scaleY(1.539);
+    }
+  }
+}
+
+// Wide-viewport-only wall decoration (Plant_1/Plant_2/the framed picture,
+// from Nutty Narrows Vending Machine v3.svg) — positioned as percentages
+// of .vending-machine's own box (not the wall/canvas) so they scale and
+// stay in registration with it at any width, and hidden below a breakpoint
+// where there isn't enough clearance beside the machine for them to read.
+// Percentages below come straight from each element's position in the
+// source artwork's combined canvas, re-expressed relative to the machine's
+// own bbox within that canvas (x: 540.5–2031.6, y: -452–1211.2).
+.wall-plant-slot,
+.wall-picture {
+  display: none;
+}
+
+@include respond-to("b-943") {
+  .wall-plant-slot {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // DOM order (before the machine art) already paints this behind
+  // .vending-machine's own z-index: 1 stacking context — no z-index needed.
+  .wall-plant-slot--left {
+    left: -46.62%;
+    top: 33%;
+    width: 57.44%;
+    height: 64.27%;
+  }
+
+  // DOM order (after MachineNav) already paints this in front of the
+  // machine art; z-index is set anyway so that stays true regardless of
+  // where this ends up in the JSX.
+  .wall-plant-slot--right {
+    left: 93.75%;
+    top: 48.02%;
+    width: 28.47%;
+    height: 48.95%;
+    z-index: 2;
+  }
+
+  .wall-picture {
+    display: block;
+    position: absolute;
+    left: 107.68%;
+    top: 17.56%;
+    width: 42.72%;
+    height: 38.3%;
+    pointer-events: none;
+  }
+}
+
+.vending-machine-art {
+  // Some browsers briefly paint complex inline SVGs with their default
+  // (black) fill before the embedded <style> block's classes are applied
+  // on first paint after a reload. Promoting the SVG to its own compositing
+  // layer avoids that render path entirely.
+  transform: translateZ(0);
 }
 
 .machine-nav {
@@ -39,7 +235,7 @@
     border-radius: 4px;
 
     &:focus-visible {
-      outline: 3px solid $pink;
+      outline: 3px solid $color-teal;
       outline-offset: 2px;
     }
   }
@@ -48,13 +244,13 @@
 .machine-nav__item,
 .machine-nav__key {
   &:hover {
-    background-color: rgba($white, 0.12);
+    background-color: rgba($color-white, 0.12);
   }
 }
 
 .machine-nav__item--pressed,
 .machine-nav__key--active {
-  background-color: rgba($pink, 0.25);
+  background-color: rgba($color-teal, 0.25);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -65,7 +261,7 @@
 
 @keyframes machine-item-press {
   0% {
-    background-color: rgba($pink, 0.45);
+    background-color: rgba($color-teal, 0.45);
   }
   100% {
     background-color: transparent;
@@ -73,7 +269,7 @@
 }
 
 .machine-nav__menu-link:hover {
-  background-color: rgba($white, 0.1);
+  background-color: rgba($color-white, 0.1);
 }
 
 .machine-nav__readout {
@@ -85,6 +281,178 @@
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: $black;
+  color: $color-purple;
   pointer-events: none;
+}
+
+// Vend animation. Targets are toggled directly via
+// document.getElementById from MachineNav.tsx, not through React — see
+// VEND_ANIMATION_MS in machine-items.ts for the durations these must match.
+// The whole sequence only runs for prefers-reduced-motion: no-preference.
+@media (prefers-reduced-motion: no-preference) {
+  .vend-spiral--coiling {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: vend-spiral-coil 0.4s ease-in-out;
+  }
+
+  .vend-item--falling {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: vend-item-fall 0.35s ease-in forwards;
+  }
+
+  .vend-reveal--rising {
+    animation: vend-reveal-rise 0.45s ease-out forwards;
+  }
+
+  .vend-reveal--returning {
+    animation: vend-reveal-return 0.35s ease-in forwards;
+  }
+}
+
+@keyframes vend-spiral-coil {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes vend-item-fall {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(160%);
+    opacity: 0;
+  }
+}
+
+// Fixed, full-viewport clip window for the vend-reveal — guarantees the
+// squirrel arms' bottom (and the ~11px stroke past their visual edge) are
+// always cropped off at the browser window's bottom edge, regardless of
+// viewport size or the reveal SVG's own proportions.
+.vend-reveal-viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 120;
+  // Flexbox (not `position: absolute; bottom: 0`) bottom-aligns the SVG —
+  // an auto-height replaced element like an <svg> with only `bottom` set
+  // (and `top: auto`) doesn't reliably resolve against its containing
+  // block's bottom edge in every browser; flex alignment has no such
+  // ambiguity.
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.vend-reveal {
+  width: min(90vw, 1020px);
+  height: auto;
+  max-height: 80vh;
+  flex-shrink: 0;
+}
+
+// --rise-cap (set per case in VendReveal.tsx) pushes the fully-risen SVG
+// down from its bottom-anchored resting spot by just enough that its own
+// bottom edge — plus the ~11px stroke past the arms' visual edge — lands
+// below .vend-reveal-viewport's clip line and is guaranteed cropped, no
+// matter how the SVG's own proportions compare to the viewport's. (Each
+// squirrel-arms SVG has some empty canvas below the arms' own bottom edge,
+// added so all 4 pages' arms share one bottom-anchored y-position despite
+// differently-sized held items above them — see the per-case offsets in
+// VendReveal.tsx — so this same push-down also absorbs that empty space.)
+@keyframes vend-reveal-rise {
+  0% {
+    transform: translateY(120%);
+  }
+  100% {
+    transform: translateY(var(--rise-cap, 0%));
+  }
+}
+
+@keyframes vend-reveal-return {
+  0% {
+    transform: translateY(var(--rise-cap, 0%));
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}
+
+#Text_Navigation, .machine-nav__menu-link {
+  display: none;
+}
+
+// Page transition on a real vend — see lib/vend-transition-context.tsx for
+// the phase timing (must match the animation-durations below) and
+// VendTransitionOverlay.tsx for the markup. Lives outside .vending-machine
+// (rendered from the root layout) so its z-index isn't trapped inside that
+// element's own stacking context the way .vend-reveal-viewport was.
+.vend-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.05);
+  transform-origin: 50% 85%; // roughly where the held item sits on screen
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .vend-transition-overlay--covering {
+    animation: vend-transition-cover 0.38s ease-in forwards;
+  }
+
+  .vend-transition-overlay--holding {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .vend-transition-overlay--fading {
+    animation: vend-transition-fade 0.38s ease-out forwards;
+  }
+}
+
+// Reduced motion still gets the color swatch (so the destination page has
+// a moment to mount before it's revealed) but no scale/grow — just a plain
+// show/hide.
+@media (prefers-reduced-motion: reduce) {
+  .vend-transition-overlay--covering,
+  .vend-transition-overlay--holding {
+    opacity: 1;
+    transform: none;
+  }
+
+  .vend-transition-overlay--fading {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes vend-transition-cover {
+  0% {
+    opacity: 0;
+    transform: scale(0.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes vend-transition-fade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
 }

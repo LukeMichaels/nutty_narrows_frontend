@@ -1,18 +1,35 @@
 @use "sass:map";
 @use "sass:meta";
 
-$white: #FFFFFF;
-$black: #0f1729;
-$blue: #3abbec;
-$pink: #cf69a8;
+$color-white: #FFFFFF;
+$color-black: #0F1729;
+$color-teal: #6acfc3; // don't use on light bg
+$color-purple: #614880; // must be bold on light bg
+$color-green: #9de565; // don't use on light bg
+$color-orange: #d2863a; // don't use on light bg
+$color-pink: #f47884; // don't use on light bg
+$color-light-pink: #F7BBCC;
+$color-yellow: #f5f5bf; // don't use on light bg
+$color-blue: #abf4f5; // don't use on light bg
+$color-dark-blue: #6c8bda; // don't use on light bg
+$error: #7a1f1f;
 
-$site-margins: 1240px;
+$site-margins: 1100px;
 
-/// Breakpoints map
-/// @prop {String} keys - Keys are identifiers mapped to a given length
-/// @prop {Map} values - Values are actual breakpoints expressed in pixels
-/// @see {mixin} respond-to
+// Adobe (Typekit) fonts (see the <link> in app/layout.tsx)
+$font-body: neue-haas-grotesk-text, sans-serif;
+$font-heading: hoss-round-slab, sans-serif;
+$font-body-regular: 400;
+$font-body-bold: 700;
+$font-heading-bold: 600;
+
+
+// Breakpoints
 $breakpoints: (
-  'b-900': (max-width: 900px),
-  'b-600': (max-width: 600px),
+  'b-640': (min-width: 640px),
+  'b-720': (min-width: 720px),
+  'b-768': (min-width: 768px),
+  'b-943': (min-width: 943px),
+  'b-1024': (min-width: 1024px),
+  'b-1210': (min-width: 1210px),
 );
