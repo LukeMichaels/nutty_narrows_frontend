@@ -40,7 +40,6 @@
 .artist-card {
   display: flex;
   flex-direction: column;
-  //gap: 8px;
 
   &__photo {
     width: 100%;
@@ -55,6 +54,13 @@
     font-size: 1.25rem;
   }
 
+  &__website {
+    align-self: flex-start;
+    margin-bottom: 10px;
+    color: $color-black;
+    text-decoration: underline;
+  }
+
   &__bio {
     line-height: 1.6; 
 
@@ -65,10 +71,4 @@
       }
     }
   } // &__bio
-
-  &__website {
-    align-self: flex-start;
-    color: $color-black;
-    text-decoration: underline;
-  }
 }

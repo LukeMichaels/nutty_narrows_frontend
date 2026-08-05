@@ -14,7 +14,7 @@ if ( ! function_exists( 'nutty_narrows_support' ) ) :
 	 * @return void
 	 */
 	function nutty_narrows_support() {
-		add_editor_style( 'style.css' );
+		add_editor_style( array( 'style.css', 'assets/css/global.css' ) );
 		load_theme_textdomain( 'nutty-narrows' );
 	}
 

@@ -12,14 +12,14 @@ export default function ArtistCard({ artist }: { artist: ArtistEntry }) {
         />
       )}
       {artist.name && <h2 className="artist-card__name">{artist.name}</h2>}
-      {artist.link?.url && (
+      {artist.link && (
         <a
           className="artist-card__website"
-          href={artist.link.url}
-          target={artist.link.target || undefined}
-          rel={artist.link.target === "_blank" ? "noopener noreferrer" : undefined}
+          href={artist.link}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          {artist.link.title || "Visit website"}
+          {artist.linkTitle || "Visit website"}
         </a>
       )}
       {artist.bio && (

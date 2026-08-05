@@ -29,11 +29,9 @@
     }
 
     .wp-element-caption {
-      // $color-teal fails contrast against this page's $color-orange
-      // background (~1.6:1 — WCAG needs 4.5:1 for normal-size text).
       color: $color-black;
     }
-  } // .about-image-column 
+  } // .wp-block-column
 
   &__content {
     display: flex;

@@ -12,13 +12,12 @@
   gap: 0.3em;
   padding: 0.7em 1.1em 0.6em;
   border-radius: 8px;
+  color: $color-yellow;
   background-color: $color-black;
-  color: $color-white;
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
   text-align: center;
-  box-shadow: 0 2px 10px rgba($color-black, 0.25);
   transition: background-color 0.15s ease;
 
   &:hover,
@@ -38,9 +37,6 @@
   }
 }
 
-// Fills with `currentColor` (see VendAnotherLink.tsx), so it follows
-// .vend-another-link's own `color` above by default. Set `color` here
-// instead to give the icon a color independent of the "Vend another" text.
 .vend-another-link__icon {
   width: 28px;
   height: auto;

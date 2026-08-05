@@ -81,16 +81,11 @@ export type AcfImage = {
   };
 } | null;
 
-export type AcfLink = {
-  url: string;
-  title: string | null;
-  target: string | null;
-} | null;
-
 export type ArtistEntry = {
   name: string | null;
   bio: string | null;
-  link: AcfLink;
+  link: string | null;
+  linkTitle: string | null;
   image: AcfImage;
 };
 
@@ -111,11 +106,8 @@ const GET_ARTISTS_PAGE = gql`
         artists {
           name
           bio
-          link {
-            url
-            title
-            target
-          }
+          link
+          linkTitle
           image {
             node {
               sourceUrl

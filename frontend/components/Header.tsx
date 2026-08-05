@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import HeaderNav from "./HeaderNav";
 
 export default function Header() {
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -33,6 +35,18 @@ export default function Header() {
       document.body.classList.remove("header-scrolled");
     };
   }, []);
+
+  // Header and its sentinel live in the root layout, so they never remount
+  // on navigation — the IntersectionObserver above only re-checks once the
+  // browser gets around to it, which can leave the compact header (sized
+  // for wherever the user scrolled to on the PREVIOUS page) on screen just
+  // long enough to cover the new page's content. Forcing both the scroll
+  // position and the header's own state back to "top" the instant the route
+  // changes removes that gap instead of waiting on it to self-correct.
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.classList.remove("header-scrolled");
+  }, [pathname]);
 
   return (
     <>

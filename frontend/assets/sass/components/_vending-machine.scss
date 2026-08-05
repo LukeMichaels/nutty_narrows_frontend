@@ -1,7 +1,7 @@
 @use "../utils/variables" as *;
 @use "../utils/mixins" as *;
 
-// The machine is the focal element — it scales independently of the
+// The machine is the focal element. It scales independently of the
 // decorative backdrop behind it: edge-to-edge (minus a small margin) on
 // narrow viewports, capped at 75% of $site-margins on wide ones. The scene
 // is a flex column so the floor (a flex-grow child) always reaches

@@ -40,11 +40,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  // $color-teal (the previous value) is documented in _variables.scss as
-  // "don't use on light bg" — it measures ~1.65:1 against $color-yellow
-  // (the homepage/legal-page background), badly failing WCAG's 3:1 floor
-  // for large text. $color-black clears every page background this site
-  // actually uses (checked against orange/pink/blue/yellow: 6.1–15.9:1).
   color: $color-black;
   font-size: 32px;
 }
@@ -54,7 +49,5 @@ h1 {
 // }
 
 strong {
-  // Same contrast issue as h1 above — <strong> can appear inline in
-  // WP-authored body content on any page background.
   color: $color-black;
 }

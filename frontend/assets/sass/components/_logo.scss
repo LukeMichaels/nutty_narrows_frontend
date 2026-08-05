@@ -8,9 +8,6 @@
   text-decoration: none;
 }
 
-// Two real logo marks (LogoFull/LogoCompact) — CSS swaps which one is
-// visible at the same b-720 breakpoint the header already uses to switch
-// from the mobile hamburger to inline nav-links.
 .header {
   .logo-compact {
     display: block;
