@@ -139,6 +139,11 @@ export const VEND_ANIMATION_MS = {
   falling: 350,
   rising: 450,
   holding: 300,
+  // Real-page vends only: the squirrel+item reveal scales up and rushes
+  // toward the viewer as the destination's color swatch grows to fill the
+  // screen — see vend-reveal--covering in _vending-machine.scss and
+  // lib/vend-transition-context.tsx, which this duration is shared with.
+  covering: 380,
   returning: 350,
 } as const;
 

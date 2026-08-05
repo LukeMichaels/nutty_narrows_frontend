@@ -309,6 +309,19 @@
   .vend-reveal--returning {
     animation: vend-reveal-return 0.35s ease-in forwards;
   }
+
+  // Real-page vends only: rather than vanishing the instant the
+  // destination's color swatch starts covering the screen, the held item
+  // scales up and rushes toward the viewer in step with it (same 0.38s —
+  // see VEND_ANIMATION_MS.covering in machine-items.ts and
+  // .vend-transition-overlay--covering below), reading as the squirrel
+  // lifting the page up into view rather than a hard cut.
+  .vend-reveal--covering {
+    // Matches .vend-transition-overlay's transform-origin so the reveal
+    // and the color swatch scale up from the same anchor point.
+    transform-origin: 50% 85%;
+    animation: vend-reveal-cover 0.38s ease-in forwards;
+  }
 }
 
 @keyframes vend-spiral-coil {
@@ -382,6 +395,22 @@
   }
   100% {
     transform: translateY(120%);
+  }
+}
+
+// Starts from the exact resting transform "holding" freezes at (translateY
+// only, scale implicitly 1) so there's no jump when this animation takes
+// over, then scales up around the same anchor point the color swatch
+// grows from (.vend-transition-overlay's transform-origin) so both read as
+// one movement rushing toward the viewer.
+@keyframes vend-reveal-cover {
+  0% {
+    transform: translateY(var(--rise-cap, 0%)) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--rise-cap, 0%)) scale(6);
+    opacity: 0;
   }
 }
 

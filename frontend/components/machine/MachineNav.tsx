@@ -23,7 +23,14 @@ import VendReveal from "./VendReveal";
 import { useVendTransition } from "@/lib/vend-transition-context";
 
 type Letter = "A" | "B" | "C";
-type VendPhase = "idle" | "coiling" | "falling" | "rising" | "holding" | "returning";
+type VendPhase =
+  | "idle"
+  | "coiling"
+  | "falling"
+  | "rising"
+  | "holding"
+  | "covering"
+  | "returning";
 
 const HIGHLIGHT_MS = 500;
 const READOUT_CLEAR_MS = 1200;
@@ -138,16 +145,24 @@ export default function MachineNav() {
     }, VEND_ANIMATION_MS.coiling + VEND_ANIMATION_MS.falling + VEND_ANIMATION_MS.rising);
 
     scheduleVend(() => {
-      if (item.href) {
-        // Start the color-swatch page transition and navigate in the same
-        // tick — the overlay (rendered in the root layout, so it survives
-        // this navigation) covers the screen while the destination page
-        // mounts underneath it, then fades to reveal it. resetVend() can
-        // clear this component's own vend state immediately since the
-        // squirrel/item reveal is about to be hidden behind the overlay
-        // anyway.
-        const color = ITEM_TRANSITION_COLOR[item.id];
-        if (color) startPageTransition(color);
+      const color = item.href ? ITEM_TRANSITION_COLOR[item.id] : undefined;
+      if (item.href && color) {
+        // Scale the squirrel+item reveal up (as if rushing toward the
+        // viewer) in step with the destination's color swatch growing to
+        // fill the screen — see vend-reveal--covering in
+        // _vending-machine.scss. The transition context owns the actual
+        // navigation from here (it fires router.push only once the cover
+        // animation finishes, then stays covered for however long the
+        // real navigation takes) — see lib/vend-transition-context.tsx.
+        // This component's own reveal can unmount as soon as that cover
+        // animation finishes, since the now fully-opaque overlay has taken
+        // over.
+        setPhase("covering");
+        startPageTransition(color, item.href);
+        scheduleVend(resetVend, VEND_ANIMATION_MS.covering);
+      } else if (item.href) {
+        // No transition color defined for this item — fall back to an
+        // immediate, un-animated navigation.
         router.push(item.href, { scroll: false });
         resetVend();
       } else {
@@ -281,7 +296,10 @@ export default function MachineNav() {
         {announcement}
       </span>
       {vendingItem &&
-        (vendPhase === "rising" || vendPhase === "holding" || vendPhase === "returning") &&
+        (vendPhase === "rising" ||
+          vendPhase === "holding" ||
+          vendPhase === "covering" ||
+          vendPhase === "returning") &&
         typeof document !== "undefined" &&
         createPortal(
           // Portaled to <body> — .vending-machine has its own z-index and
@@ -294,7 +312,13 @@ export default function MachineNav() {
             <VendReveal
               key={vendingItem.id}
               itemId={vendingItem.id}
-              className={vendPhase === "returning" ? "vend-reveal--returning" : "vend-reveal--rising"}
+              className={
+                vendPhase === "returning"
+                  ? "vend-reveal--returning"
+                  : vendPhase === "covering"
+                  ? "vend-reveal--covering"
+                  : "vend-reveal--rising"
+              }
             />
           </div>,
           document.body
