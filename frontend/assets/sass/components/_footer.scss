@@ -10,13 +10,59 @@ footer {
     width: 100%;
     max-width: $site-margins;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
     padding: 60px 30px 60px;
     margin: 0 auto;
     color: $color-white;
+
+    @include respond-to(b-1024) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+
+  .footer-content__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    @include respond-to(b-1024) {
+      align-items: flex-start;
+      margin-right: 30px;
+    }
+  }
+
+  .footer-content__navs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+
+    nav {
+      flex: 1 1 110px;
+      max-width: 160px;
+    }
+
+    @include respond-to(b-1024) {
+      width: auto;
+      justify-content: flex-start;
+
+      nav {
+        flex: 0 0 auto;
+      }
+    }
   }
 
   .logo-compact {
+    height: 60px;
     max-width: 100px;
+    fill: $color-yellow;
   }
 
   .logo-full .st0, .logo-compact .st0 {
@@ -45,8 +91,6 @@ footer {
       }
     } 
   }
-
-
 
   .nav-link {
     display: block;

@@ -25,13 +25,11 @@ const SOCIAL_LINKS = [
   },
 ];
 
-// TODO: swap in the real contact email/address (and any social links) once
-// the business owner provides them — this is placeholder copy.
 export default function Footer() {
   return (
     <footer>
-      <div className="footer-content grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
-        <div className="flex flex-col gap-3">
+      <div className="footer-content">
+        <div className="footer-content__brand">
           <Logo variant="footer" />
           {/* <p>Longview, WA’s creative vending machines. Nostalgic thrifts, local art, and cute things.</p> */}
           <div className="social-links flex gap-2">
@@ -49,23 +47,25 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav aria-labelledby="footer-nav-explore" className="flex flex-col gap-2">
-          <h2 id="footer-nav-explore" className="font-semibold uppercase tracking-wide">Info</h2>
-          {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="nav-link">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="footer-content__navs">
+          <nav aria-labelledby="footer-nav-explore" className="flex flex-col gap-2">
+            <h2 id="footer-nav-explore" className="font-semibold uppercase tracking-wide">Info</h2>
+            {NAV_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className="nav-link" scroll={false}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-        <nav aria-labelledby="footer-nav-legal" className="flex flex-col gap-2">
-          <h2 id="footer-nav-legal" className="font-semibold uppercase tracking-wide">Legal</h2>
-          {LEGAL_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="nav-link">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+          <nav aria-labelledby="footer-nav-legal" className="flex flex-col gap-2">
+            <h2 id="footer-nav-legal" className="font-semibold uppercase tracking-wide">Legal</h2>
+            {LEGAL_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className="nav-link" scroll={false}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
 
       <div className="copyright">
