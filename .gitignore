@@ -51,3 +51,4 @@ wp-config.php
 #/wp-content/themes
 /.well-known
 /wp-content/themes/Nutty_Narrows/config.codekit3
+/.claude/launch.json
