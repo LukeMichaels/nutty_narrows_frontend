@@ -37,8 +37,12 @@
 .location-card {
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
   border: 1px solid rgba($color-white, 0.15);
   border-radius: 8px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
   &__photo {
     width: 100%;
