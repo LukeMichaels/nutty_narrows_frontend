@@ -11,6 +11,11 @@
     color: $color-black;
   }
 
+  h1 {
+    max-width: 500px;
+    line-height: 1.75rem;
+  }
+
   .wp-block-column {
 
     .wp-block-image {
