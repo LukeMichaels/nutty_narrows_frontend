@@ -52,3 +52,4 @@ wp-config.php
 /.well-known
 /wp-content/themes/Nutty_Narrows/config.codekit3
 /.claude/launch.json
+/frontend/AGENTS.md
