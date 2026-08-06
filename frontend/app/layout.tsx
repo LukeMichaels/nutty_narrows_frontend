@@ -47,6 +47,21 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
+        {/* Warm the DNS/TCP/TLS handshake to Adobe's font hosts before the
+            render-blocking Typekit stylesheet (and the font files it pulls)
+            are requested — shaves the third-party connection cost off the
+            critical path. crossOrigin is required for the font fetches,
+            which are CORS requests. */}
+        <link
+          rel="preconnect"
+          href="https://use.typekit.net"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://p.typekit.net"
+          crossOrigin="anonymous"
+        />
         <link rel="stylesheet" href="https://use.typekit.net/uvf4xfr.css" />
       </head>
       <body className="min-h-full flex flex-col">
