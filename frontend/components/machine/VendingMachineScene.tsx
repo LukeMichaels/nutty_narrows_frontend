@@ -41,11 +41,19 @@ export default function VendingMachineScene() {
           <div className="wall-plant-slot wall-plant-slot--right">
             <Plant2 />
           </div>
+          {/* Purely decorative, wide-viewport-only, and a heavy (~550KB)
+              traced SVG — lazy + async-decoded so it never competes with
+              the machine (the actual hero) for bandwidth on first paint.
+              A plain <img> on purpose: next/image can't optimize SVGs
+              (that needs dangerouslyAllowSVG, which we keep off). */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="wall-picture"
             src="/wall-picture-of-sandy.svg"
             alt=""
             aria-hidden="true"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

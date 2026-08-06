@@ -9,7 +9,11 @@ export default function LocationList({ locations }: { locations: LocationEntry[]
   return (
     <div className="location-list">
       {locations.map((location, index) => (
-        <LocationCard key={`${location.title}-${index}`} location={location} />
+        <LocationCard
+          key={`${location.title}-${index}`}
+          location={location}
+          preload={index === 0}
+        />
       ))}
     </div>
   );

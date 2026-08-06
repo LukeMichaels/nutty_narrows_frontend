@@ -41,12 +41,20 @@
   display: flex;
   flex-direction: column;
 
+  // Fixed-ratio box that next/image fills (see ArtistCard.tsx). The ratio
+  // + overflow clip keep layout stable (zero CLS) while the <img> inside
+  // is cropped to cover.
   &__photo {
+    position: relative;
     width: 100%;
     margin-bottom: 10px;
     aspect-ratio: 1;
-    object-fit: cover;
     border-radius: 8px;
+    overflow: hidden;
+  }
+
+  &__photo-img {
+    object-fit: cover;
   }
 
   &__name {

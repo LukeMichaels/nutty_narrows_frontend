@@ -9,7 +9,11 @@ export default function ArtistGrid({ artists }: { artists: ArtistEntry[] }) {
   return (
     <div className="artist-grid">
       {artists.map((artist, index) => (
-        <ArtistCard key={`${artist.name}-${index}`} artist={artist} />
+        <ArtistCard
+          key={`${artist.name}-${index}`}
+          artist={artist}
+          preload={index === 0}
+        />
       ))}
     </div>
   );
