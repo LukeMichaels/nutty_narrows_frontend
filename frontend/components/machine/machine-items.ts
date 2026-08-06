@@ -53,10 +53,6 @@ export const MACHINE_ITEMS: MachineItem[][] = [
   ],
 ];
 
-// The four "real" pages also appear as a small in-scene menu (the
-// Text_Navigation screen) — nav mode 2.
-export const MENU_ITEMS = MACHINE_ITEMS.flat().filter((item) => item.href);
-
 // Each real page's own landing background color (the $color-* SCSS
 // variables in assets/sass/pages/_{about,artists,contact,locations}.scss,
 // duplicated here as plain hex since MachineNav needs them in JS for the
