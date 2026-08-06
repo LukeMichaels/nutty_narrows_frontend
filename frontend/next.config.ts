@@ -25,9 +25,33 @@ const nextConfig: NextConfig = {
     // dev — the production WP host resolves to a real public IP, so this
     // stays off (and the guard stays active) in production.
     dangerouslyAllowLocalIP: process.env.NODE_ENV !== "production",
+    // Serve AVIF first (smallest), falling back to WebP, then the source.
+    // The WordPress uploads are already WebP; AVIF re-encoding shrinks the
+    // artist/location photos further with no visible quality loss.
+    formats: ["image/avif", "image/webp"],
+    // The optimized variants are content-addressed by URL+width+quality and
+    // never change for a given upload, so cache them at Vercel's edge for a
+    // month rather than the 4-hour default (re-uploading an image in
+    // WordPress produces a new URL, which busts this naturally).
+    minimumCacheTTL: 2678400, // 31 days
+    // Next 16 requires an explicit quality allowlist; 75 is the default the
+    // components use and is visually lossless for photos at these sizes.
+    qualities: [75],
   },
   async headers() {
     return [
+      {
+        // The large decorative wall SVG never changes without a redeploy,
+        // so serve it with a long immutable cache instead of revalidating
+        // it on every visit (if the art is ever updated, rename the file).
+        source: "/wall-picture-of-sandy.svg",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
       {
         source: "/:path*",
         headers: [

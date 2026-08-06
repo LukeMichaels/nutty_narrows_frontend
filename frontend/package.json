@@ -9,10 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@vercel/analytics": "^2.0.1",
     "graphql": "^16.14.2",
     "graphql-request": "^7.4.0",
-    "next": "16.2.10",
+    "next": "16.3.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -22,9 +21,16 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.10",
+    "eslint-config-next": "16.3.0",
     "sass": "^1.101.0",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "//browserslist": "Matches Next.js 16's own modern baseline (see node_modules/next/dist/docs/03-architecture/supported-browsers.md). Declared explicitly so the SWC/Lightning/autoprefixer toolchain all target the same modern set and don't ship transforms/prefixes for browsers this audience doesn't use.",
+  "browserslist": [
+    "chrome 111",
+    "edge 111",
+    "firefox 111",
+    "safari 16.4"
+  ]
 }
